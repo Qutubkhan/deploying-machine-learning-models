@@ -20,6 +20,7 @@ fetch_data: &fetch_data
       source venv/bin/activate
       chmod +x ./scripts/fetch_kaggle_dataset.sh
       ./scripts/fetch_kaggle_dataset.sh
+      unzip packages/regression_model/regression_model/datasets/house-prices-advanced-regression-techniques.zip -d packages/regression_model/regression_model/datasets/
 
 jobs:
   test_regression_model:
@@ -112,7 +113,7 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+            git push https://heroku:$cd44c9f4-71ec-499d-b18a-9e3c2c70a9a7@git.heroku.com/$foo-ml-deploy.git master
 
 workflows:
   version: 2
@@ -126,14 +127,14 @@ workflows:
             - test_regression_model
             - test_ml_api
             - section_9_differential_tests
-          filters:
-            branches:
-              only:
-                - master
+          # filters:
+          #   branches:
+          #     only:
+          #       - master
       - section_10_deploy_to_heroku:
           requires:
             - train_and_upload_regression_model
-          filters:
-            branches:
-              only:
-                - master
+          # filters:
+          #   branches:
+          #     only:
+          #       - master
